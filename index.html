@@ -11,17 +11,23 @@
     
     <style>
         :root {
-            --bg-color: #f0f7ff;          /* خلفية أزرق فاتح جداً */
-            --card-bg: #ffffff;           /* لون الكروت أبيض */
-            --primary-blue: #2563eb;      /* الأزرق الأساسي */
-            --accent-blue: #3b82f6;
-            --light-blue-accent: #e0f2fe;
-            --text-dark: #0f172a;         /* لون النصوص الداكنة */
-            --text-muted: #64748b;        /* لون النصوص الفرعية */
-            --discount-red: #ef4444;      /* لون شريط الخصم */
-            --discord-color: #5865F2;     /* لون الديسكورد المميز */
-            --shadow-soft: 0 10px 30px -5px rgba(37, 99, 235, 0.08);
-            --shadow-hover: 0 20px 35px -10px rgba(37, 99, 235, 0.18);
+            /* نظام الألوان المتناسق مع الشعار المعدني */
+            --bg-color: #f1f5f9;                  /* خلفية رمادية فاتحة جداً باردة تناسب الفضي */
+            --card-bg: #ffffff;                   /* لون الكروت أبيض نقياً */
+            --text-dark: #0f172a;                 /* أزرق كحلي داكن جداً للنصوص */
+            --text-muted: #64748b;                /* رمادي معدني متوسط */
+            
+            /* تدرجات ألوان الشعار والزر */
+            --primary-blue: #2563eb;              /* الأزرق الملكي المصقول */
+            --blue-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            --silver-gradient: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+            --metallic-border: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            
+            --discount-badge: linear-gradient(135deg, #2563eb, #1e40af); /* شريط خصم كحلي أنيق */
+            --discord-color: #5865F2;             /* لون الديسكورد الرسمي */
+            
+            --shadow-soft: 0 12px 30px -8px rgba(15, 23, 42, 0.06);
+            --shadow-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.15);
         }
 
         * {
@@ -33,17 +39,18 @@
 
         body {
             background-color: var(--bg-color);
+            background-image: radial-gradient(at 50% 0%, rgba(226, 232, 240, 0.6) 0px, transparent 70%);
             color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* الهيدر العلوي المحدث بالشعار */
+        /* الهيدر العلوي */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(224, 242, 254, 0.8);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -52,95 +59,379 @@
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0.9rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        /* حاوية الشعار والاسم */
         .logo-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px; /* المسافة بين الشعار والاسم */
+            gap: 14px;
         }
 
         .logo-img {
-            height: 50px; /* التحكم بارتفاع الشعار */
+            height: 48px;
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12)); /* إبراز مجسم الشعار */
         }
 
         .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 900;
-            color: var(--primary-blue);
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
         }
 
-        /* بقية الأنماط (نفس الكود السابق) */
+        /* القسم الرئيسي */
         .hero {
             text-align: center;
-            padding: 3.5rem 1.5rem 2rem;
+            padding: 4rem 1.5rem 2.5rem;
             max-width: 800px;
             margin: 0 auto;
         }
-        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.6rem; color: var(--text-dark); }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); }
-        .container { max-width: 1200px; margin: 1rem auto 4rem; padding: 0 1.5rem; width: 100%; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
-        .card { background: var(--card-bg); border-radius: 24px; padding: 2.2rem 1.8rem; box-shadow: var(--shadow-soft); border: 1px solid #e2e8f0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: #bfdbfe; }
-        .badge { position: absolute; top: -12px; right: 20px; background: var(--discount-red); color: #ffffff; padding: 4px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25); }
-        .card-header h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text-dark); line-height: 1.4; min-height: 56px; }
-        .price-box { margin: 1rem 0; display: flex; align-items: baseline; gap: 10px; }
-        .current-price { font-size: 2.5rem; font-weight: 900; color: var(--primary-blue); }
-        .old-price { font-size: 1.2rem; color: var(--text-muted); text-decoration: line-through; font-weight: 600; }
-        .features { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
-        .features li { padding: 8px 0; color: var(--text-muted); font-size: 0.92rem; display: flex; align-items: center; gap: 8px; }
-        .features li::before { content: "✓"; color: var(--primary-blue); font-weight: 800; }
-        .btn { display: block; width: 100%; padding: 14px 20px; background-color: var(--primary-blue); color: #ffffff; text-align: center; border: none; border-radius: 14px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
-        .btn:hover { background-color: #1d4ed8; box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35); }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(6px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; padding: 1rem; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: #ffffff; border-radius: 28px; padding: 2.2rem 2rem; max-width: 460px; width: 100%; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: scale(0.9); transition: all 0.3s ease; position: relative; border: 1px solid #e0f2fe; }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        .modal-icon { width: 60px; height: 60px; background: #e0f2fe; color: var(--primary-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 1.2rem; }
-        .modal-content h3 { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 0.5rem; font-weight: 800; }
-        .modal-content p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
-        .contact-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 16px; padding: 1.2rem; margin-bottom: 1.2rem; text-align: right; }
-        .user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; background: #ffffff; padding: 10px 14px; border-radius: 12px; border: 1px solid #e2e8f0; }
-        .user-label { font-size: 0.88rem; color: var(--text-muted); }
-        .user-tag { font-weight: 800; color: var(--primary-blue); direction: ltr; font-size: 1.05rem; background: #eff6ff; padding: 2px 10px; border-radius: 8px; }
-        .discord-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 12px; background-color: var(--discord-color); color: white; text-decoration: none; border-radius: 12px; font-weight: 700; transition: background 0.2s; }
-        .discord-btn:hover { background-color: #4752C4; }
-        .close-btn { position: absolute; top: 18px; left: 20px; background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-weight: bold; color: var(--text-muted); transition: all 0.2s; }
-        .close-btn:hover { background: #e2e8f0; color: var(--text-dark); }
-        footer { margin-top: auto; text-align: center; padding: 2rem; background: #ffffff; border-top: 1px solid #e2e8f0; color: var(--text-muted); font-size: 0.9rem; }
-        @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } .logo-text { font-size: 1.5rem; } .logo-img { height: 40px; } }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* شبكة العروض */
+        .container {
+            max-width: 1200px;
+            margin: 1rem auto 4rem;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* بطاقات العروض الفضية */
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2.4rem 1.8rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: #cbd5e1;
+        }
+
+        /* شريط الخصم الأنيق */
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--discount-badge);
+            color: #ffffff;
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+            min-height: 56px;
+        }
+
+        /* قسم السعر */
+        .price-box {
+            margin: 1.2rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .current-price {
+            font-size: 2.7rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+        }
+
+        .old-price {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        /* قائمة المميزات */
+        .features {
+            list-style: none;
+            margin-bottom: 2.2rem;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 9px 0;
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--primary-blue);
+            font-weight: 900;
+            background: #eff6ff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* زر الطلب بتدرج فخم */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--blue-gradient);
+            color: #ffffff;
+            text-align: center;
+            border: none;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25 ease;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
+        }
+
+        /* النافذة المنبثقة (Popup Modal) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.4rem 2rem;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.92);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #e2e8f0;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: #eff6ff;
+            color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.2rem;
+            border: 1px solid #dbeafe;
+        }
+
+        .modal-content h3 {
+            font-size: 1.45rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .contact-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .user-label {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .user-tag {
+            font-weight: 800;
+            color: var(--primary-blue);
+            direction: ltr;
+            font-size: 1.05rem;
+            background: #eff6ff;
+            padding: 3px 12px;
+            border-radius: 8px;
+        }
+
+        .discord-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 13px;
+            background-color: var(--discord-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 800;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-btn:hover {
+            background-color: #4752C4;
+            transform: translateY(-1px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #e2e8f0;
+            color: var(--text-dark);
+        }
+
+        /* الفوتر */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .logo-text { font-size: 1.5rem; }
+            .logo-img { height: 40px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر المحدث -->
+    <!-- الهيدر -->
     <header>
         <div class="nav-container">
             <div class="logo-wrapper">
-                <!-- استدعاء صورة الشعار. تأكد من تسميتها logo.png ووضعها جنب الملف -->
                 <img src="logo.png" alt="Silver Store Logo" class="logo-img">
                 <span class="logo-text">سلفر ستور</span>
             </div>
         </div>
     </header>
 
-    <!-- بقية محتوى الصفحة (نفس السابق) -->
+    <!-- المقدمة -->
     <section class="hero">
-        <h1>قائمة عروض التصاميم</h1>
-        <p>اختر العرض المناسب لك وابدأ بتطوير مظهر منصتك بحسابات وأسعار مميزة.</p>
+        <h1>عروض وتصاميم سلفر ستور</h1>
+        <p>تصاميم احترافية بلمسة معدنية حديثة وبأفضل الأسعار المنافسة.</p>
     </section>
 
+    <!-- بطاقات العروض الثلاثية -->
     <main class="container">
         <div class="pricing-grid">
+
             <!-- العرض 1 -->
             <div class="card">
                 <span class="badge">خصم 25%</span>
@@ -159,6 +450,7 @@
                 </ul>
                 <button class="btn" onclick="openModal()">طلب الخدمة</button>
             </div>
+
             <!-- العرض 2 -->
             <div class="card">
                 <span class="badge">خصم 50%</span>
@@ -177,6 +469,7 @@
                 </ul>
                 <button class="btn" onclick="openModal()">طلب الخدمة</button>
             </div>
+
             <!-- العرض 3 -->
             <div class="card">
                 <span class="badge">خصم 60%</span>
@@ -195,35 +488,51 @@
                 </ul>
                 <button class="btn" onclick="openModal()">طلب الخدمة</button>
             </div>
+
         </div>
     </main>
 
+    <!-- نافذة الطلب -->
     <div class="modal-overlay" id="orderModal" onclick="closeModalOnOuterClick(event)">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">✕</button>
+            
             <div class="modal-icon">💬</div>
             <h3>طريقة الطلب والتواصل</h3>
             <p>لطلب التصميم أو الاستفسار، يمكنك التواصل معي مباشرة عبر منصة الديسكورد:</p>
+
             <div class="contact-box">
                 <div class="user-info">
-                    <span class="user-label">اسم المستخدم (User):</span>
+                    <span class="user-label">اسم المستخدم:</span>
                     <span class="user-tag">pk1c</span>
                 </div>
             </div>
+
             <a href="https://discord.gg/u5v7MZa4u" target="_blank" class="discord-btn">
                 <span>الدخول لـ سيرفر الديسكورد</span>
             </a>
         </div>
     </div>
 
+    <!-- الفوتر -->
     <footer>
         <p>جميع الحقوق محفوظة © سلفر ستور</p>
     </footer>
 
     <script>
-        function openModal() { document.getElementById('orderModal').classList.add('active'); }
-        function closeModal() { document.getElementById('orderModal').classList.remove('active'); }
-        function closeModalOnOuterClick(event) { if (event.target.id === 'orderModal') { closeModal(); } }
+        function openModal() {
+            document.getElementById('orderModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').classList.remove('active');
+        }
+
+        function closeModalOnOuterClick(event) {
+            if (event.target.id === 'orderModal') {
+                closeModal();
+            }
+        }
     </script>
 
 </body>
